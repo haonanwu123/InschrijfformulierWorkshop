@@ -9,7 +9,8 @@
 <body>
     <style>
         h1 {
-            transform: translateX(500px);
+           position: relative;
+           left: 40%;
         }
         label {
             float: left;
@@ -31,16 +32,17 @@
         }
 
         input[type="submit"] {
-            transform: translateX(500px);
+           position: relative;
+           left: 40%;
         }
     </style>
     <h1 algin="center">Inschrijfformulier Workshop</h1>
-    <form action="header.php" metod="post">
+    <form action="" method="post">
         <label calss="label1">Naam:</label>
         <input type="text" name="naam" placeholder="Typ tekst">
         <br>
         <label>Email:</label>
-        <input type="email" name="email" placeholder="Typ tekst">
+        <input type="text" name="email" placeholder="Typ tekst">
         <br>
         <label>Klas:</label>
         <input type="text" name="klas" placeholder="Typ tekst">
@@ -61,7 +63,19 @@
         <input type="submit" name="inschrijven" value="Inschrijven">
     </form>
     <?php
-
+    if(isset($_POST['inschrijven'])) {
+        if(!empty($_POST['email'])) {
+            $check = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
+        }if($check === false) {
+            echo "Email is not correct.<br>";
+        }else {
+        //   header("location:http://localhost/InschrijfformulierWorkshop/welkom.php");
+        echo' welcome';
+        }
+       
+    } else {
+        echo "Je heb niet ingevuld." . "<br>";
+    }
     ?>
 </body>
 </html>
