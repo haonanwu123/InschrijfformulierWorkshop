@@ -42,18 +42,18 @@
         <input type="text" name="naam" placeholder="Typ tekst">
         <br>
         <label>Email:</label>
-        <input type="text" name="email" placeholder="Typ tekst">
+        <input type="email" name="email" placeholder="Typ tekst">
         <br>
         <label>Klas:</label>
         <input type="text" name="klas" placeholder="Typ tekst">
         <br>
         <label>Workschops</label>
         <br>
-        <input type="radio" name="Drones" value="Drones">Drones
+        <input type="radio" name="keuze" value="Drones">Drones
         <br>
-        <input type="radio" name="RasberryPi" value="Rasberry Pi">Rasberry Pi
+        <input type="radio" name="keuze" value="Rasberry Pi">Rasberry Pi
         <br>
-        <input type="radio" name="Security" value="Security">Security
+        <input type="radio" name="keuze" value="Security">Security
         <br>
         <br>
         <input type="checkbox" name="checkbox">
@@ -63,18 +63,24 @@
         <input type="submit" name="inschrijven" value="Inschrijven">
     </form>
     <?php
-    if(isset($_POST['inschrijven'])) {
-        if(!empty($_POST['email'])) {
-            $check = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
-        }if($check === false) {
-            echo "Email is not correct.<br>";
-        }else {
-        //   header("location:http://localhost/InschrijfformulierWorkshop/welkom.php");
-        echo' welcome';
+     session_start();
+    if(isset($_POST["inschrijven"])) {
+        if(!empty($_POST["naam"]) && !empty($_POST["email"]) && !empty($_POST["klas"]) && !empty($_POST["keuze"]) && !empty($_POST["checkbox"])) {
+            $check = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
+        } else {
+            echo "Je vergeet iets te invullen." . "<br>";
         }
-       
+        if ($check === false) {
+            echo "Je email is not coreccet."  . "<br>";
+        } else {
+            $_SESSION["naam"] = $_POST["naam"];
+            $_SESSION["email"] = $_POST["email"];
+            $_SESSION["klas"] = $_POST["klas"];
+            $_SESSION["keuze"] = $_POST["keuze"];
+            header("location:welkom.php");
+        }
     } else {
-        echo "Je heb niet ingevuld." . "<br>";
+        echo "Je ben voor eerst" . "<br>";
     }
     ?>
 </body>
