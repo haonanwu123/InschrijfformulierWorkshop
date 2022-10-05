@@ -67,17 +67,17 @@
     if(isset($_POST["inschrijven"])) {
         if(!empty($_POST["naam"]) && !empty($_POST["email"]) && !empty($_POST["klas"]) && !empty($_POST["keuze"]) && !empty($_POST["checkbox"])) {
             $check = filter_input(INPUT_POST,"email",FILTER_VALIDATE_EMAIL);
+            if ($check === false) {
+                echo "Je email is not coreccet."  . "<br>";
+            } else {
+                $_SESSION["naam"] = $_POST["naam"];
+                $_SESSION["email"] = $_POST["email"];
+                $_SESSION["klas"] = $_POST["klas"];
+                $_SESSION["keuze"] = $_POST["keuze"];
+                header("location:welkom.php");
+            }
         } else {
             echo "Je vergeet iets te invullen." . "<br>";
-        }
-        if ($check === false) {
-            echo "Je email is not coreccet."  . "<br>";
-        } else {
-            $_SESSION["naam"] = $_POST["naam"];
-            $_SESSION["email"] = $_POST["email"];
-            $_SESSION["klas"] = $_POST["klas"];
-            $_SESSION["keuze"] = $_POST["keuze"];
-            header("location:welkom.php");
         }
     } else {
         echo "Je ben voor eerst" . "<br>";

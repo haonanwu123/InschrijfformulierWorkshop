@@ -9,7 +9,11 @@
 <body>
     <?php
     session_start();
-    echo $_SESSION["naam"];
+    echo "<h1>" . "welkom" . "</h1>" . "<br>";
+    echo $_SESSION["naam"] . "<br>";
+    echo $_SESSION["email"] . "<br>";
+    echo $_SESSION["klas"] . "<br>";
+    echo $_SESSION["keuze"] . "<br>";
     ?>
 </body>
 </html>
